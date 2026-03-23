@@ -1,0 +1,72 @@
+
+Chemisafe Predictor Pro - Technical Report
+===========================================
+
+Project Overview
+----------------
+Chemisafe Predictor Pro is a web-based application designed to predict the safety and reactivity of chemical mixtures. It leverages an advanced Large Language Model (LLM) via the Groq API to analyze chemical combinations in real-time and provide detailed safety reports, including hazard levels, potential reactions, warnings, and safe alternatives.
+
+Key Objectives
+--------------
+1.  **Safety First**: Prevent dangerous laboratory accidents by predicting hazardous reactions before they occur.
+2.  **Accessibility**: Provide a user-friendly interface for students, researchers, and hobbyists to check chemical compatibility.
+3.  **Speed**: Utilize high-performance AI inference to deliver instant results.
+
+System Architecture
+-------------------
+The application is built on a modern client-server architecture:
+
+1.  **Frontend (Client-Side)**
+    *   **Framework**: React (v19) with Vite for high-performance bundling.
+    *   **Language**: TypeScript for type safety and code reliability.
+    *   **Styling**: Tailwind CSS with a custom "Glassmorphism" design system (translucent panels, neon accents, particle effects).
+    *   **Components**: 
+        *   `Lab Builder`: Interactive form for adding/removing chemical inputs.
+        *   `Safety Gauge`: Visual indicator of safety scores.
+        *   `Result Panel`: Displays detailed AI analysis.
+        *   `Data Vault`: Stores history of past simulations (Local Storage based).
+
+2.  **Backend (Server-Side)**
+    *   **Server**: FastAPI (Python) - chosen for its speed and ease of use with async operations.
+    *   **AI Integration**: Groq Python SDK.
+    *   **Model**: `llama-3.3-70b-versatile` - A powerful open-weights model capable of complex reasoning about chemical properties.
+    *   **API Protocol**: REST over HTTP.
+
+Workflow
+--------
+1.  **Input**: User enters a list of chemicals (e.g., "Ammonia", "Bleach") in the React frontend.
+2.  **Request**: The frontend sends a POST request to `http://localhost:8000/predict`.
+3.  **Processing**:
+    *   The FastAPI server receives the request.
+    *   It constructs a strict system prompt instructing the AI to act as a chemical safety expert.
+    *   The prompt is sent to the Groq API.
+4.  **Inference**: The Llama-3.3 model analyzes the mixture based on its training data and returns a structured JSON response.
+5.  **Response**: The server forwards the JSON result (Safety Score, Hazard Level, Warnings, etc.) to the frontend.
+6.  **Display**: The frontend parses the data and updates the UI with the safety gauge, reaction summary, and alerts.
+
+Key Features
+------------
+*   **Real-time AI Analysis**: Instant feedback on any combination of chemicals.
+*   **Hazard Classification**: Categorizes mixtures into SAFE, CAUTION, DANGER, or LETHAL levels.
+*   **Detailed Explanations**: Provides the "why" behind the safety score, educating the user.
+*   **Intelligent Alternatives**: Suggests safer chemicals or methods when high risks are detected.
+*   **History Tracking**: Automatically saves past predictions to the browser's local storage for easy reference.
+*   **No Authentication Required**: Designed for frictionless access; anyone can use the tool immediately without creating an account.
+
+Technical Specifications
+------------------------
+*   **Frontend Port**: 3000 (Default Vite)
+*   **Backend Port**: 8000 (Uvicorn)
+*   **AI Model Context**: 8k tokens (approx)
+*   **Response Format**: STRICT JSON Schema
+
+Future Improvements
+-------------------
+*   **Offline Mode**: Integrate a smaller, quantized model (e.g., TinyLlama) via WebLLM for completely offline usage.
+*   **Molecular Visualization**: Add 3D structure rendering for entered chemicals.
+*   **Export to PDF**: Generate printable safety data sheets (SDS) for experiments.
+
+Credits
+-------
+Developed by Chemisafe AI Team.
+Powered by Groq and Meta Llama 3.

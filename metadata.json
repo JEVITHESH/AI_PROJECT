@@ -1,0 +1,7 @@
+{
+  "name": "ChemiSafe Predictor Pro",
+  "description": "An advanced AI-powered chemical reactivity and safety analysis tool featuring real-time hazard detection, safety gauges, and intelligent lab-grade insights.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
