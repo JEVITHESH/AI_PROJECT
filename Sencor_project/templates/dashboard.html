@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+    <meta charset="UTF-8">
+    <title>அறை AI Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: #38bdf8;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: #4ade80;
+            font-size: 0.85rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.3
+            }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #334155;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card h2 {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .value {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        .unit {
+            font-size: 1rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .badge.good {
+            background: #064e3b;
+            color: #34d399;
+        }
+
+        .badge.moderate {
+            background: #451a03;
+            color: #fb923c;
+        }
+
+        .badge.bad {
+            background: #450a0a;
+            color: #f87171;
+        }
+
+        .story-box {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 28px;
+            margin-top: 20px;
+            border-left: 4px solid #38bdf8;
+        }
+
+        .story-box h2 {
+            color: #38bdf8;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .story-box p {
+            line-height: 2.0;
+            font-size: 1.05rem;
+            color: #cbd5e1;
+        }
+
+        .voice-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .voice-info {
+            font-size: 0.78rem;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .chat-box {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 28px;
+            margin-top: 20px;
+            border-left: 4px solid #f472b6;
+        }
+
+        .chat-box h2 {
+            color: #f472b6;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .chat-messages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .msg {
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 85%;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .msg.user {
+            background: #1d4ed8;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg.ai {
+            background: #1e3a5f;
+            color: #e2e8f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .chat-input-row input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: white;
+            font-size: 0.95rem;
+            min-width: 200px;
+        }
+
+        .chat-input-row input:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        .health-form {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 28px;
+            margin-top: 20px;
+        }
+
+        .health-form h2 {
+            color: #a78bfa;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 65px;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        #status {
+            color: #4ade80;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+
+        .coaching-box {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 28px;
+            margin-top: 20px;
+            border-left: 4px solid #a78bfa;
+            display: none;
+        }
+
+        .coaching-box h2 {
+            color: #a78bfa;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .coaching-box p {
+            line-height: 2.0;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+        }
+
+        .btn {
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-blue {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+
+        .btn-blue:hover {
+            background: #7dd3fc;
+        }
+
+        .btn-purple {
+            background: #a78bfa;
+            color: #0f172a;
+        }
+
+        .btn-purple:hover {
+            background: #c4b5fd;
+        }
+
+        .btn-pink {
+            background: #f472b6;
+            color: #0f172a;
+        }
+
+        .btn-pink:hover {
+            background: #f9a8d4;
+        }
+
+        .btn-green {
+            background: #4ade80;
+            color: #0f172a;
+        }
+
+        .btn-green:hover {
+            background: #86efac;
+        }
+
+        .btn-red {
+            background: #f87171;
+            color: #0f172a;
+        }
+
+        .btn-red:hover {
+            background: #fca5a5;
+        }
+
+        .btn-sm {
+            padding: 8px 14px;
+            font-size: 0.82rem;
+        }
+
+        .btn.recording {
+            background: #ef4444;
+            animation: recordPulse 1s infinite;
+        }
+
+        @keyframes recordPulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.6
+            }
+        }
+
+        .timestamp {
+            text-align: center;
+            color: #475569;
+            font-size: 0.8rem;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #334155;
+            font-size: 0.8rem;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🌡️ அறை AI Dashboard</h1>
+    <p class="subtitle">செம்மையான சென்சார் கண்காணிப்பு — AI மூலம்</p>
+    <div class="live-indicator"><span class="dot"></span> நேரடி — ஒவ்வொரு 15 விநாடிகளுக்கும் புதுப்பிக்கப்படுகிறது</div>
+
+    <div class="grid">
+        <div class="card">
+            <h2>🌡️ வெப்பநிலை</h2>
+            <div class="value" id="temp">--</div>
+            <div class="unit">°C</div>
+            <div id="temp-badge" class="badge good">--</div>
+        </div>
+        <div class="card">
+            <h2>💧 ஈரப்பதம்</h2>
+            <div class="value" id="hum">--</div>
+            <div class="unit">%</div>
+            <div id="hum-badge" class="badge good">--</div>
+        </div>
+        <div class="card">
+            <h2>💨 காற்று தரம்</h2>
+            <div class="value" id="air">--</div>
+            <div class="unit">raw (0–1023)</div>
+            <div id="air-badge" class="badge good">--</div>
+        </div>
+    </div>
+
+    <div class="story-box">
+        <h2>🤖 AI அறை கதைசொல்லி</h2>
+        <p id="story">சென்சார் தரவுக்காக காத்திருக்கிறேன்... 👀</p>
+        <div class="voice-controls">
+            <button class="btn btn-blue btn-sm" onclick="speakStory()">🔊 தமிழில் கேளு</button>
+            <button class="btn btn-red btn-sm" onclick="stopSpeaking()">⏹ நிறுத்து</button>
+        </div>
+        <p class="voice-info" id="voice-info">🔍 Tamil voice status checking...</p>
+    </div>
+
+    <div class="chat-box">
+        <h2>💬 உங்கள் அறை AI உடன் பேசுங்கள்</h2>
+        <div class="chat-messages" id="chat-messages">
+            <div class="msg ai">வணக்கம் மச்சி! 👋 உங்கள் அறையைப் பத்தி என்னையும் கேளுங்க, அல்லது வெறுமனே பேசலாம் lol
+            </div>
+        </div>
+        <div class="chat-input-row">
+            <input type="text" id="chat-input" placeholder="தமிழில் தட்டச்சு செய் அல்லது voice பயன்படுத்து..."
+                onkeydown="if(event.key==='Enter') sendChat()">
+            <button class="btn btn-pink btn-sm" onclick="sendChat()">அனுப்பு 💬</button>
+            <button class="btn btn-green btn-sm" id="voice-btn" onclick="toggleVoiceInput()">🎤 குரல்</button>
+        </div>
+    </div>
+
+    <div class="health-form">
+        <h2>📋 உங்கள் health scores பதிவு செய்யுங்கள்</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label>😴 தூக்கம் (1–5):</label>
+                <input type="number" id="sleep" min="1" max="5" placeholder="1-5">
+            </div>
+            <div class="form-group">
+                <label>⚡ உற்பத்தித்திறன் (1–5):</label>
+                <input type="number" id="prod" min="1" max="5" placeholder="1-5">
+            </div>
+        </div>
+        <div class="form-row">
+            <button class="btn btn-blue" onclick="logHealth()">💾 சேமி</button>
+            <button class="btn btn-purple" onclick="getCoaching()">🧠 AI ஆலோசனை பெறு</button>
+        </div>
+        <div id="status"></div>
+    </div>
+
+    <div class="coaching-box" id="coaching-section">
+        <h2>🧠 AI Health Coach</h2>
+        <p id="coaching"></p>
+    </div>
+
+    <div class="timestamp" id="ts">கடைசியாக புதுப்பிக்கப்பட்டது: காத்திருக்கிறேன்...</div>
+    <div class="footer">Sensor → NodeMCU → WiFi → Flask → Groq AI → நீங்கள் 🚀</div>
+
+    <script>
+        // ── BADGES ──────────────────────────────────────────
+        const getAirBadge = v => v < 300 ? ['good', '✅ நல்லது'] : v < 600 ? ['moderate', '⚠️ சாதாரணம்'] : ['bad', '🚨 மோசம்'];
+        const getTempBadge = v => v < 20 ? ['moderate', '🥶 குளிர்'] : v <= 30 ? ['good', '✅ சரியான வெப்பம்'] : ['bad', '🔥 அதிக சூடு'];
+        const getHumBadge = v => v < 30 ? ['moderate', '🏜️ வறண்டது'] : v <= 60 ? ['good', '✅ சரியான ஈரப்பதம்'] : ['bad', '💦 அதிக ஈரம்'];
+
+        function setBadge(id, val, fn) {
+            const el = document.getElementById(id);
+            const [cls, text] = fn(parseFloat(val));
+            el.className = 'badge ' + cls;
+            el.textContent = text;
+        }
+
+        // ── VOICE SETUP ─────────────────────────────────────
+        let tamilVoice = null;
+
+        // Wait for voices to load then find Tamil voice
+        function loadVoices() {
+            const voices = window.speechSynthesis.getVoices();
+            tamilVoice = voices.find(v =>
+                v.lang === 'ta-IN' || v.lang === 'ta' || v.name.toLowerCase().includes('tamil')
+            );
+            const info = document.getElementById('voice-info');
+            if (tamilVoice) {
+                info.textContent = '✅ Tamil voice found: ' + tamilVoice.name;
+                info.style.color = '#4ade80';
+            } else {
+                info.textContent = '⚠️ Tamil voice இல்லை — Windows Settings → Time & Language → Speech → Add Tamil voice install பண்ணு';
+                info.style.color = '#fb923c';
+            }
+        }
+
+        // Voices load asynchronously in Chrome
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+        loadVoices();
+
+        function speakText(text) {
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.rate = 0.85;
+            utter.pitch = 1.0;
+            if (tamilVoice) {
+                utter.voice = tamilVoice;
+                utter.lang = 'ta-IN';
+            } else {
+                utter.lang = 'en-US';
+            }
+            window.speechSynthesis.speak(utter);
+        }
+
+        function speakStory() {
+            const text = document.getElementById('story').textContent;
+            if (!text || text.includes('காத்திருக்கிறேன்')) return;
+            speakText(text);
+        }
+
+        function stopSpeaking() {
+            window.speechSynthesis.cancel();
+        }
+
+        // ── FETCH DATA ───────────────────────────────────────
+        async function fetchLatest() {
+            try {
+                const res = await fetch('/latest');
+                const json = await res.json();
+                if (json.data && json.data.temperature) {
+                    document.getElementById('temp').textContent = json.data.temperature;
+                    document.getElementById('hum').textContent = json.data.humidity;
+                    document.getElementById('air').textContent = json.data.air_quality;
+                    document.getElementById('story').textContent = json.story;
+                    document.getElementById('ts').textContent = '🕐 கடைசியாக புதுப்பிக்கப்பட்டது: ' + json.data.timestamp;
+                    setBadge('temp-badge', json.data.temperature, getTempBadge);
+                    setBadge('hum-badge', json.data.humidity, getHumBadge);
+                    setBadge('air-badge', json.data.air_quality, getAirBadge);
+                }
+            } catch (e) { }
+        }
+
+        // ── CHAT ─────────────────────────────────────────────
+        function addMessage(text, role) {
+            const box = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = 'msg ' + role;
+            div.textContent = text;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        async function sendChat() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+            input.value = '';
+            addMessage(msg, 'user');
+
+            const thinking = document.createElement('div');
+            thinking.className = 'msg ai';
+            thinking.textContent = '... யோசிக்கிறேன் 🤔';
+            thinking.id = 'thinking';
+            document.getElementById('chat-messages').appendChild(thinking);
+            document.getElementById('chat-messages').scrollTop = 9999;
+
+            try {
+                const res = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: msg })
+                });
+                const json = await res.json();
+                document.getElementById('thinking')?.remove();
+                addMessage(json.reply, 'ai');
+                speakText(json.reply);
+            } catch (e) {
+                document.getElementById('thinking')?.remove();
+                addMessage('என்னமோ error வந்துச்சு மச்சி 😅', 'ai');
+            }
+        }
+
+        // ── VOICE INPUT ──────────────────────────────────────
+        let recognition = null;
+        let isRecording = false;
+
+        function toggleVoiceInput() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('Voice input Chrome browser-ல மட்டும் வேலை செய்யும்!');
+                return;
+            }
+            if (isRecording) {
+                recognition.stop();
+                return;
+            }
+            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SR();
+            recognition.lang = 'ta-IN';
+            recognition.interimResults = false;
+
+            recognition.onstart = () => {
+                isRecording = true;
+                const btn = document.getElementById('voice-btn');
+                btn.textContent = '🔴 கேட்கிறேன்...';
+                btn.classList.add('recording');
+            };
+
+            recognition.onresult = (e) => {
+                const transcript = e.results[0][0].transcript;
+                document.getElementById('chat-input').value = transcript;
+                sendChat();
+            };
+
+            recognition.onend = () => {
+                isRecording = false;
+                const btn = document.getElementById('voice-btn');
+                btn.textContent = '🎤 குரல்';
+                btn.classList.remove('recording');
+            };
+
+            recognition.onerror = (e) => {
+                console.log('Voice error:', e.error);
+                isRecording = false;
+                document.getElementById('voice-btn').textContent = '🎤 குரல்';
+                document.getElementById('voice-btn').classList.remove('recording');
+            };
+
+            recognition.start();
+        }
+
+        // ── HEALTH LOG ───────────────────────────────────────
+        async function logHealth() {
+            const sleep = document.getElementById('sleep').value;
+            const prod = document.getElementById('prod').value;
+            if (!sleep || !prod) {
+                document.getElementById('status').textContent = '⚠️ இரண்டு scores-ம் போடு!';
+                return;
+            }
+            await fetch('/log_health', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sleep, productivity: prod })
+            });
+            document.getElementById('status').textContent = '✅ சேமிக்கப்பட்டது!';
+            document.getElementById('sleep').value = '';
+            document.getElementById('prod').value = '';
+        }
+
+        async function getCoaching() {
+            document.getElementById('status').textContent = '⏳ AI coach கேட்கிறேன்...';
+            try {
+                const res = await fetch('/coaching');
+                const json = await res.json();
+                document.getElementById('coaching').textContent = json.coaching;
+                document.getElementById('coaching-section').style.display = 'block';
+                document.getElementById('status').textContent = '✅ ஆலோசனை தயார்!';
+                document.getElementById('coaching-section').scrollIntoView({ behavior: 'smooth' });
+            } catch (e) {
+                document.getElementById('status').textContent = '❌ Error. மறுபடியும் try பண்ணு.';
+            }
+        }
+
+        fetchLatest();
+        setInterval(fetchLatest, 15000);
+    </script>
+</body>
+
+</html>
