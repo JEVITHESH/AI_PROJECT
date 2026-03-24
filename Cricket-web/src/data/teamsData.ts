@@ -1,0 +1,56 @@
+
+export const TEAM_POOLS: Record<string, string> = {
+    // Pool A
+    "TNPESU CHENNAI": "Pool A",
+    "HINDUSTAN UNIVERSITY": "Pool A",
+    "MANIPAL UNIVERSITY": "Pool A",
+    "KL DEEMED GUNTUR": "Pool A",
+    "KUVEMBU UNIVERSITY": "Pool A",
+    "ACHARYA NAGARJUNA GUNTUR": "Pool A",
+    "JNTU KAKINADA": "Pool A",
+    "DR. AMBEDKAR SRIKAKULAM": "Pool A",
+    "RAJIV GANDHI BANGALORE": "Pool A",
+    "SRM IST KATTANKULATHUR": "Pool A",
+    "BANGALORE CITY UNIVERSITY": "Pool A",
+
+    // Pool B
+    "RAJIV GANDHI NUZVID": "Pool B",
+    "SDM DHARWAD": "Pool B",
+    "MOTHER THERASA UNIVERSITY": "Pool B",
+    "THIRUVALLUR UNIVERSITY": "Pool B",
+    "TAMIL NADU AMBEDKAR LAW": "Pool B",
+    "SAVEETHA UNIVERSITY": "Pool B",
+    "MGR UNIVERSITY CHENNAI": "Pool B",
+    "KLE TECH HUBBALI": "Pool B",
+    "AVINASHILINGAM UNIVERSITY": "Pool B",
+    "IIPE VIZAGAPATTINAM": "Pool B",
+    "ANNA UNIVERSITY": "Pool B",
+    "UNIVERSITY OF MYSORE": "Pool B",
+
+    // Pool C
+    "MADURAI KAMARAJ": "Pool C",
+    "KARNATAKA STATE AKKAMAHADEVI": "Pool C",
+    "KANNUR UNIVERSITY": "Pool C",
+    "JEPPIAR UNIVERSITY": "Pool C",
+    "MANGALORE UNIVERSITY": "Pool C",
+    "PONDICHERRY UNIVERSITY": "Pool C",
+    "KAKTIYA WARANGAL": "Pool C",
+    "ANNAMALAI UNIVERSITY": "Pool C",
+    "OSMANIA UNIVERSITY": "Pool C",
+    "KRISHNADEVARAYA ANANTHAPUR": "Pool C",
+    "BHARATHITHASAN UNIVERSITY": "Pool C",
+    "UNIVERSITY OF CALICUT": "Pool C",
+
+    // Pool D
+    "UNIVERSITY OF KERALA": "Pool D",
+    "VTU BELAGAVI": "Pool D",
+    "BHARATHIAR UNIVERSITY": "Pool D",
+    "KRISHNA UNIVERSITY": "Pool D",
+    "PALAMURU UNIVERSITY": "Pool D",
+    "MG UNIVERSITY KOTTAYAM": "Pool D",
+    "PES UNIVERSITY": "Pool D",
+    "ALAGAPPA UNIVERSITY": "Pool D",
+    "ADIKAVI NANNAYA UNIVERSITY": "Pool D",
+    "ANDHRA UNIVERSITY": "Pool D",
+    "UNIVERSITY OF MADRAS": "Pool D",
+};

@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Premium CSK Theme - Light Mode */
+    /* Background: Very subtle warm off-white, clean and premium */
+    --background: 210 20% 98%;
+    /* Foreground: Deep Blue (almost black) for sharp contrast */
+    --foreground: 222 47% 11%;
+
+    /* Card: White with slight transparency for glass effect */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    /* Popover: Pure white */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* PRIMARY: Rich Royal Blue */
+    --primary: 212 100% 45%;
+    /* Primary Text: White */
+    --primary-foreground: 0 0% 100%;
+
+    /* SECONDARY: CSK Yellow (for accents/highlights) */
+    --secondary: 49 97% 50%;
+    --secondary-foreground: 212 100% 31%;
+
+    /* ACCENT: Roaring Orange (For highlights) #EA3C12 -> HSL 12 86% 49% */
+    --accent: 12 86% 49%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Muted: Soft grey-blue for secondary text/backgrounds */
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Destructive: Error Red */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders: Soft grey */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 49 97% 50%; /* Ring focus color is now CSK Yellow */
+
+    --radius: 0.75rem;
+
+    /* Sidebar - keeping consistent with primary theme */
+    --sidebar-background: 212 100% 31%; /* Deep Blue sidebar */
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 49 97% 50%; /* Yellow active states */
+    --sidebar-primary-foreground: 212 100% 31%;
+    --sidebar-accent: 212 80% 25%; /* Slightly darker blue hover */
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 212 80% 25%;
+    --sidebar-ring: 49 97% 50%;
+  }
+
+  .dark {
+    /* Premium Dark Mode - Deep Blue Background */
+    --background: 222 47% 6%; /* Very deep blue, almost black */
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    /* PRIMARY: CSK Yellow shines even more in dark mode */
+    --primary: 49 97% 50%;
+    --primary-foreground: 212 100% 31%;
+
+    /* SECONDARY: Lighter Blue for visibility */
+    --secondary: 212 80% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* ACCENT: Vibrant Orange */
+    --accent: 12 86% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 217 33% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 15%;
+    --input: 217 33% 15%;
+    --ring: 49 97% 50%;
+
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 49 97% 50%;
+    --sidebar-primary-foreground: 212 100% 31%;
+    --sidebar-accent: 217 33% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 15%;
+    --sidebar-ring: 49 97% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Glassmorphism Utilities - Enhanced */
+  .glass {
+    @apply bg-background/70 backdrop-blur-xl border-b border-white/20 shadow-sm supports-[backdrop-filter]:bg-background/60;
+  }
+  
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-lg border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.01] hover:bg-card/80;
+  }
+
+  /* Premium Gradients */
+  .bg-gradient-csk {
+    @apply bg-gradient-to-r from-[hsl(49,97%,50%)] via-[hsl(12,86%,49%)] to-[hsl(212,100%,31%)];
+  }
+}
+
+@layer utilities {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}

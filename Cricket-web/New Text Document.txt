@@ -1,0 +1,190 @@
+South Zone Women’s Cricket Tournament App Content Details
+
+1. App Overview 
+•	App Name
+Example: South Zone Women’s Cricket Tournament – KSRCT
+•	App Logo & Theme
+o	Anna University and College logo + Cricket visual
+•	About the Tournament
+o	Tournament name
+o	Organizing institution (K.S. Rangasamy College of Technology)
+o	Dates & duration
+o	Participating universities/teams
+o	Brief tournament objective
+o	Anna University members details
+
+
+2. User Roles 
+The app can have common access, but content designed for:
+•	Players
+•	Team Managers
+•	Coaches
+•	Match Officials
+•	Organizing Committee
+•	Support Staff
+•	Anna university officials
+
+3. Home Screen 
+Include:
+•	Tournament banner / poster
+•	Countdown to first match
+•	Quick buttons:
+o	Match Schedule
+o	Ground Location
+o	Accommodation
+o	Food
+o	Contacts
+o	Emergency Help
+•	Latest announcements / alerts
+
+
+4. Match Information Module 
+Match Schedule
+•	Date-wise & team-wise fixtures
+•	Match number
+•	Teams playing
+•	Venue
+•	Match time
+•	Ground map link
+Match Results (Live or Post-match)
+•	Scores (total score only)
+•	Winning team
+•	Player of the Match
+•	Points table
+
+Points Table
+•	Team name
+•	Matches played
+•	Wins / Losses
+•	Points
+•	Net run rate (if needed)
+
+
+5. Ground & Venue Details
+Ground Information
+•	Ground name
+•	Address
+•	Google Map integration
+•	Entry gate details
+•	Dressing room locations (If available)
+•	Practice nets details (If available)
+Ground Rules
+•	Reporting time
+•	Warm-up area
+•	Equipment guidelines
+•	Restricted zones
+Ground Gallery
+•	Ground photos
+•	Practice session photos
+•	Aerial view (if available)
+
+6. Accommodation Details 
+For outstation teams.
+Include:
+•	Hostel / Hotel name
+•	Address
+•	Distance from ground
+•	Room allocation details
+•	Check-in & check-out time
+•	Facilities (Wi-Fi, hot water, dining hall)
+Room Allocation (Optional – Manager View)
+•	Team-wise room details
+•	Contact person for accommodation
+
+7. Food & Dining Information
+Official Food Arrangement
+•	Breakfast / Lunch / Dinner timing
+•	Venue of food serving
+•	Menu (if fixed)
+Nearby Food Places
+•	Veg & non-veg restaurants
+•	Cafes
+•	Distance from ground & hostel
+•	Google Map link
+•	Contact numbers
+
+8. Transport & Travel Details
+Official Transport
+•	Pick-up & drop points
+•	Bus / Van timing
+•	Vehicle numbers
+•	Driver contact details
+•	Coordinator Contact numbers
+Route Map
+•	Accommodation → Ground
+•	Railway Station → Campus
+•	Bus Stand → Campus
+Emergency Transport Help
+•	Vehicle coordinator contact
+
+9. Team & Player Information
+Participating Teams
+•	University/College name
+•	Team logo
+•	Manager & Coach name
+Player List (Optional)
+•	Player name
+•	Jersey number
+•	Role (Batsman/Bowler/All-rounder)
+
+10. Photo & Media Gallery
+•	Opening ceremony photos
+•	Match action photos
+•	Award ceremony
+•	Daily highlights
+•	Video clips (optional)
+
+11. Notifications & Announcements
+•	Match time changes
+•	Ground changes
+•	Weather updates
+•	Meeting schedules
+•	Result announcements
+
+12. Contact Directory (Must-have)
+Organizing Committee
+•	Tournament Director
+•	Sports Officer
+•	Accommodation In-charge
+•	Transport In-charge
+•	Food In-charge
+Support Services
+•	Medical Officer
+•	Ambulance
+•	Security Desk
+•	Help Desk
+•	Near by Hospital contact details 
+
+13. Emergency & Help Section
+•	Emergency call button
+•	Medical help
+•	Women safety officer
+•	Campus security
+•	Lost & found
+
+14. Rules, Guidelines & Code of Conduct
+•	Tournament rules
+•	Match regulations
+•	Discipline guidelines
+•	Anti-ragging policy
+•	Fair play code
+
+15. Feedback & Support
+•	Feedback form (players/managers)
+•	Complaint / issue reporting (If needed)
+
+16. Play Store Compliance 
+To successfully publish the app:
+•	Privacy Policy page
+•	No unnecessary permissions
+
+•	Offline access for key info
+•	Clear app description & screenshots
+
+17. Optional Advanced Features (If possible may add these features)
+•	Live score integration
+•	QR code for ID verification
+•	Attendance check-in
+•	Volunteer dashboard
+•	Multi-language support (English + Tamil)
+
