@@ -1,0 +1,5 @@
+{
+  "name": "Object Finder AI",
+  "description": "Upload an image and specify an object to find or identify it using AI vision.",
+  "requestFramePermissions": []
+}
