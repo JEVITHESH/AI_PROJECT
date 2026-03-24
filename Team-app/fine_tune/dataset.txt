@@ -1,0 +1,9 @@
+{
+  "id": "abc123",
+  "conversations": [
+    {"from": "human", "value": "Hi"},
+    {"from": "gpt", "value": "Hello! How can I help you today?"},
+    {"from": "human", "value": "Explain AI in simple words"},
+    {"from": "gpt", "value": "AI means computers that can think and learn like humans."}
+  ]
+}
