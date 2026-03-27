@@ -1,6 +1,6 @@
 import Groq from "groq-sdk";
 
-const API_KEY = process.env.GROQ_API_KEY;
+const API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 
 export const aiService = {
   async sendMessage(message: string, history: any[] = [], context: string = "") {
